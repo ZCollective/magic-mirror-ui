@@ -1,0 +1,93 @@
+<template>
+  <v-card
+  color="#000000">
+    <v-row v-if="activeEvent !== undefined && activeEvent !== null" class="text-left">
+        <v-list-item two-line>
+          <v-list-item-icon>
+            <v-icon size="50px">mdi-trash-can-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="headline">{{activeEvent.DESCRIPTION}} </v-list-item-title>
+            <v-list-item-subtitle class="title">{{activeEvent.dateObj.getDate()}}.{{activeEvent.dateObj.getMonth() +1 }}.{{activeEvent.dateObj.getFullYear()}}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+    </v-row>
+    <v-row v-else class="text-left">
+        <v-list-item one-line dense>
+          <v-list-item-icon>
+            <v-icon size="50px">mdi-trash-can-outline</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title class="title">Keine aktuellen Termine</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>    
+    </v-row>
+    <v-row align="start" class="text-left">
+      <v-col>
+        <v-timeline dense color="#000000">
+          <v-timeline-item small fill-dot v-for="event in eventList" :key="event.UID" class="pa-0" color="#cccccc">
+            <v-card color="#000000">
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{`${event.dateObj.getDate() >= 10 ? event.dateObj.getDate() : '0' + event.dateObj.getDate()}.
+                    ${event.dateObj.getMonth() >= 9 ? (event.dateObj.getMonth() +1 ) : '0' + (event.dateObj.getMonth() +1 )}.
+                    ${event.dateObj.getFullYear() >= 10 ? event.dateObj.getFullYear() : '0' + event.dateObj.getFullYear()}
+                    - ${event.SUMMARY}`}}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
+      </v-col>
+    </v-row>
+  </v-card>
+</template>
+<script>
+import calendar from '../assets/trashCalendar.json'
+export default {
+  data () {
+    return {
+      activeEvent: null,
+      eventList: [],
+      refreshHandle: undefined
+    }
+  },
+  created () {
+    // launching method to get the next events
+    this.getNextEvents()
+  },
+  methods: {
+    getNextEvents () {
+      var events = calendar.VCALENDAR[0].VEVENT
+      events = events.map(event => {
+        var eventDate = event['DTSTART;VALUE=DATE']
+        var year = parseInt(eventDate.substring(0,4))
+        var month = parseInt(eventDate.substring(4,6))-1
+        var day = parseInt(eventDate.substring(6))
+        event.dateObj = new Date(year, month, day)
+        return event
+      })
+      var currentDate = new Date()
+      currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())
+      events = events.filter(event => {
+        var timedifference = event.dateObj.getTime() - currentDate.getTime()
+        return timedifference < 0 ? false : true
+      })
+
+      if ((events[0].dateObj.getTime() - currentDate.getTime()) <= (1.5*24*60*60*1000)) {
+        console.log('Detected active event!')
+        this.activeEvent = events[0]
+        events = events.slice(1)
+      }
+      this.eventList = events.slice(0, (events.length > 5 ? 5 : events.length))
+    }
+  }
+}
+</script>
+<style>
+.theme--dark.v-timeline:before {
+    background: #aaaaaa;
+}
+</style>
