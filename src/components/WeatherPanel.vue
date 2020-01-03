@@ -15,7 +15,7 @@
     <v-row class="text-center">
       <v-list-item two-line>
         <v-list-item-content>
-          <v-list-item-title class="display-2">{{cityName}} </v-list-item-title>
+          <v-list-item-title class="display-2">{{cityName}}</v-list-item-title>
           <v-list-item-subtitle class="title">{{dayDictionary[days[activeDay].weekday]}}, {{days[activeDay].condition}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
