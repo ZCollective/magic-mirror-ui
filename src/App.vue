@@ -18,5 +18,5 @@ export default {
 };
 </script>
 <style>
-html { overflow-y: auto !important}
+html { overflow-y: hidden !important}
 </style>

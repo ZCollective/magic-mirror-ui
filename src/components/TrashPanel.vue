@@ -1,18 +1,18 @@
 <template>
   <v-card
   color="#000000">
-    <v-row v-if="activeEvent !== undefined && activeEvent !== null" class="text-left">
+    <v-row v-if="activeEvent !== undefined && activeEvent !== null" class="text-left mb-0">
         <v-list-item two-line>
           <v-list-item-icon>
-            <v-icon size="50px">mdi-trash-can-outline</v-icon>
+            <v-icon size="60px">mdi-trash-can-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="headline">{{activeEvent.DESCRIPTION}} </v-list-item-title>
-            <v-list-item-subtitle class="title">{{activeEvent.dateObj.getDate()}}.{{activeEvent.dateObj.getMonth() +1 }}.{{activeEvent.dateObj.getFullYear()}}</v-list-item-subtitle>
+            <v-list-item-title class="display-1">{{activeEvent.DESCRIPTION}} </v-list-item-title>
+            <v-list-item-subtitle class="headline">{{activeEvent.dateObj.getDate()}}.{{activeEvent.dateObj.getMonth() +1 }}.{{activeEvent.dateObj.getFullYear()}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
     </v-row>
-    <v-row v-else class="text-left">
+    <v-row v-else class="text-left mb-0">
         <v-list-item one-line dense>
           <v-list-item-icon>
             <v-icon size="50px">mdi-trash-can-outline</v-icon>
@@ -22,7 +22,7 @@
           </v-list-item-content>
         </v-list-item>    
     </v-row>
-    <v-row align="start" class="text-left">
+    <v-row align="start" class="text-left mt-0">
       <v-col>
         <v-timeline dense color="#000000">
           <v-timeline-item small fill-dot v-for="event in eventList" :key="event.UID" class="pa-0" color="#cccccc">
@@ -51,12 +51,15 @@ export default {
     return {
       activeEvent: null,
       eventList: [],
-      refreshHandle: undefined
+      refreshHandle: undefined,
+      intervalHandle: undefined
     }
   },
   created () {
     // launching method to get the next events
     this.getNextEvents()
+    var vm = this
+    this.intervalHandle = setInterval(() => vm.getNextEvents(),30 * 60 * 1000)
   },
   methods: {
     getNextEvents () {

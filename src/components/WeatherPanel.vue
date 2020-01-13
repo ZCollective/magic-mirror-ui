@@ -8,8 +8,6 @@
       </v-skeleton-loader>
 
   <v-card v-else
-    class="mx-auto"
-    max-width="500"
     color="#000000"
   >
     <v-row class="text-center">
@@ -34,10 +32,10 @@
       
     </v-card-text>
         <v-list-item>
-      <v-list-item-icon>
-        <v-icon>mdi-send</v-icon>
+      <v-list-item-icon class="ml-5">
+        <v-icon size="50px">mdi-weather-windy</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle class="display-1">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
+      <v-list-item-subtitle class="mx-0 display-1">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
     </v-list-item>
     </v-col>
     <v-col align="center" justify="center">
