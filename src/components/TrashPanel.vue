@@ -51,7 +51,6 @@ export default {
     return {
       activeEvent: null,
       eventList: [],
-      refreshHandle: undefined,
       intervalHandle: undefined
     }
   },
@@ -59,10 +58,12 @@ export default {
     // launching method to get the next events
     this.getNextEvents()
     var vm = this
+    console.log('Starting trash interval...')
     this.intervalHandle = setInterval(() => vm.getNextEvents(),30 * 60 * 1000)
   },
   methods: {
     getNextEvents () {
+      console.log('Running Trash refresh.')
       var events = calendar.VCALENDAR[0].VEVENT
       events = events.map(event => {
         var eventDate = event['DTSTART;VALUE=DATE']
