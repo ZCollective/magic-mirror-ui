@@ -14,7 +14,7 @@
       <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="display-4 py-4">{{cityName}}</v-list-item-title>
-          <v-list-item-subtitle class="display-1">{{dayDictionary[days[activeDay].weekday]}}, {{days[activeDay].condition}}</v-list-item-subtitle>
+          <!--<v-list-item-subtitle class="display-1">{{dayDictionary[days[activeDay].weekday]}}, {{days[activeDay].condition}}</v-list-item-subtitle>-->
         </v-list-item-content>
       </v-list-item>
     </v-row>
@@ -32,10 +32,10 @@
       
     </v-card-text>
         <v-list-item>
-      <v-list-item-icon class="ml-5">
+      <v-list-item-icon class="ml-5 mr-n6">
         <v-icon size="70px">mdi-weather-windy</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle class="mx-0 display-2">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
+      <v-list-item-subtitle class="ml-n4 mr-0 display-2">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
     </v-list-item>
     </v-col>
     <v-col align="center" justify="center">
