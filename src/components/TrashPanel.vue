@@ -1,31 +1,27 @@
 <template>
   <v-card
-  color="#000000">
-    <v-row v-if="activeEvent !== undefined && activeEvent !== null" class="text-left mb-0">
-        <v-list-item two-line>
-          <v-list-item-icon>
+  color="#000000" class="mt-8">
+    <v-row v-if="activeEvent !== undefined && activeEvent !== null" class="text-left mb-0" justify="start">
+      <v-col>
             <v-icon size="70px">mdi-trash-can-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title class="display-2 py-3">{{activeEvent.DESCRIPTION}} </v-list-item-title>
-            <v-list-item-subtitle class="display-1 py-2">{{activeEvent.dateObj.getDate()}}.{{activeEvent.dateObj.getMonth() +1 }}.{{activeEvent.dateObj.getFullYear()}}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+      </v-col>
+      <v-col>
+        <v-list-item-title class="display-2 py-3">{{activeEvent.DESCRIPTION}} </v-list-item-title>
+        <v-list-item-subtitle class="display-1 py-2">
+          {{`${activeEvent.dateObj.getDate() >= 10 ? activeEvent.dateObj.getDate() : '0' + activeEvent.dateObj.getDate()}.
+                    ${activeEvent.dateObj.getMonth() >= 9 ? (activeEvent.dateObj.getMonth() +1 ) : '0' + (activeEvent.dateObj.getMonth() +1 )}.
+                    ${activeEvent.dateObj.getFullYear() >= 10 ? activeEvent.dateObj.getFullYear() : '0' + activeEvent.dateObj.getFullYear()}`}}
+          </v-list-item-subtitle>
+      </v-col>
     </v-row>
-    <v-row v-else class="text-left mb-0">
-        <v-list-item one-line dense>
-          <v-list-item-icon>
-            <v-icon size="70px">mdi-trash-can-outline</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title class="display-1 py-4">Keine aktuellen Termine</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>    
+    <v-row v-else class="text-left mb-0" justify="start">
+        <v-icon size="70px">mdi-trash-can-outline</v-icon>
+        <h1 class="display-1 py-4 ml-7">Keine aktuellen Termine</h1>
     </v-row>
     <v-row align="start" class="text-left mt-0">
       <v-col>
         <v-timeline dense color="#000000">
-          <v-timeline-item fill-dot v-for="event in eventList" :key="event.UID" class="pa-0" color="#cccccc">
+          <v-timeline-item small fill-dot v-for="event in eventList" :key="event.UID" class="pa-0" color="#cccccc">
             <v-card color="#000000">
               <v-list-item>
                 <v-list-item-content>

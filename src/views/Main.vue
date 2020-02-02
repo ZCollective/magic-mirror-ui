@@ -1,17 +1,17 @@
 <template>
-<v-container fluid style="height: 100%">
-  <v-col cols="12" style="height: 100%" align="end" align-self="end">
-    <v-row align="start" justify="space-between" style="height: 100%">
-      <v-col xs="12" sm="6" md="6" lg="4" xl="4">
+<v-container fluid style="height: 100%" class="mt-0 pt-0">
+  <v-col cols="12" style="height: 100%" align="end" align-self="end" class="mt-0 pt-0">
+    <v-row align="start" justify="space-between" style="height: 100%" class="mt-0 pt-0">
+      <v-col xs="12" sm="6" md="6" lg="4" xl="4" class="mt-0 pt-0">
         <!--<comicPanel/>
         <v-spacer></v-spacer>-->
         <trashPanel/>
       </v-col>
-      <v-col xs="12" sm="6" md="6" lg="4" xl="4">
+      <v-col xs="12" sm="6" md="6" lg="4" xl="4" class="mt-0 pt-0">
         <clockPanel/>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col xs="12" sm="6" md="6" lg="3" xl="3">
+      <v-col xs="12" sm="6" md="6" lg="3" xl="3" class="mt-0 pt-0">
         <weatherPanel/>
       </v-col>
     </v-row>

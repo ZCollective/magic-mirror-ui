@@ -43,7 +43,7 @@ export default {
         this.timeString = `${currentDate.getHours()>= 10 ? currentDate.getHours() : '0' + currentDate.getHours()}:${currentDate.getMinutes()>= 10 ? currentDate.getMinutes() : '0' + currentDate.getMinutes()}`
       }
       this.currentDay = currentDate.getDay()
-      this.dateString = `${currentDate.getDate()}.${(currentDate.getMonth() +1) >= 10 ? (currentDate.getMonth() +1) : '0' + (currentDate.getMonth() +1)}.${currentDate.getFullYear()}`
+      this.dateString = `${currentDate.getDate() >= 10 ? currentDate.getDate() : '0' + currentDate.getDate()}.${(currentDate.getMonth() +1) >= 10 ? (currentDate.getMonth() +1) : '0' + (currentDate.getMonth() +1)}.${currentDate.getFullYear()}`
       this.loading = false
     }
   }
