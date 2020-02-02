@@ -8,15 +8,13 @@
       </v-skeleton-loader>
 
   <v-card v-else
-    class="mx-auto"
-    max-width="500"
     color="#000000"
   >
     <v-row class="text-center">
       <v-list-item two-line>
         <v-list-item-content>
-          <v-list-item-title class="display-2">{{cityName}} </v-list-item-title>
-          <v-list-item-subtitle class="title">{{dayDictionary[days[activeDay].weekday]}}, {{days[activeDay].condition}}</v-list-item-subtitle>
+          <v-list-item-title class="display-4 py-4">{{cityName}}</v-list-item-title>
+          <v-list-item-subtitle class="display-1">{{dayDictionary[days[activeDay].weekday]}}, {{days[activeDay].condition}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-row>
@@ -24,20 +22,20 @@
     <v-col>
     <v-card-text>
       <v-row align="center" justify="center">
-        <v-col class="display-2" cols="8" align="center" justify="center">
+        <v-col class="display-4" cols="8" align="center" justify="center">
           {{days[activeDay].avg}}&deg;C
         </v-col>
         <v-col cols="4" justify="center" align="center">
-          <v-icon size="80px">{{iconDictionary[days[activeDay].icon]}}</v-icon>
+          <v-icon size="100px">{{iconDictionary[days[activeDay].icon]}}</v-icon>
         </v-col>
       </v-row>
       
     </v-card-text>
         <v-list-item>
-      <v-list-item-icon>
-        <v-icon>mdi-send</v-icon>
+      <v-list-item-icon class="ml-5">
+        <v-icon size="70px">mdi-weather-windy</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle class="display-1">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
+      <v-list-item-subtitle class="mx-0 display-2">{{days[activeDay].wind}} km/h</v-list-item-subtitle>
     </v-list-item>
     </v-col>
     <v-col align="center" justify="center">
@@ -47,14 +45,15 @@
         v-for="item in days.slice(1)"
         :key="item.weekday"
         dense
+        class="mb-4"
       >
-        <v-list-item-title class="title">{{ dayDictionary[item.weekday] }}</v-list-item-title>
+        <v-list-item-title class="display-1 py-4">{{ dayDictionary[item.weekday] }}</v-list-item-title>
 
         <v-list-item-icon>
-          <v-icon large>{{iconDictionary[item.icon]}}</v-icon>
+          <v-icon size="50px">{{iconDictionary[item.icon]}}</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-subtitle class="text-right title">
+        <v-list-item-subtitle class="text-right display-1 py-4">
           {{ item.avg }}&deg;
         </v-list-item-subtitle>
       </v-list-item>

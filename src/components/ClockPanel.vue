@@ -7,8 +7,8 @@
       <v-col justify="center">
         <v-list-item two-line justify="center" align="center">
           <v-list-item-content justify="center">
-            <v-list-item-title class="display-4">{{timeString}} </v-list-item-title>
-            <v-list-item-subtitle class="title">{{dayDictionary[currentDay]}}, {{dateString}}</v-list-item-subtitle>
+            <v-list-item-title class="time-text">{{timeString}} </v-list-item-title>
+            <v-list-item-subtitle class="display-1 font-weight-bold">{{dayDictionary[currentDay]}}, {{dateString}}</v-list-item-subtitle>
           </v-list-item-content>  
         </v-list-item>
       </v-col>
@@ -43,9 +43,14 @@ export default {
         this.timeString = `${currentDate.getHours()>= 10 ? currentDate.getHours() : '0' + currentDate.getHours()}:${currentDate.getMinutes()>= 10 ? currentDate.getMinutes() : '0' + currentDate.getMinutes()}`
       }
       this.currentDay = currentDate.getDay()
-      this.dateString = `${currentDate.getDate()}.${currentDate.getMonth() +1}.${currentDate.getFullYear()}`
+      this.dateString = `${currentDate.getDate()}.${(currentDate.getMonth() +1) >= 10 ? (currentDate.getMonth() +1) : '0' + (currentDate.getMonth() +1)}.${currentDate.getFullYear()}`
       this.loading = false
     }
   }
 }
 </script>
+<style scoped>
+.time-text {
+  font-size: 9em
+}
+</style>
