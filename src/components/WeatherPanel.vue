@@ -1,7 +1,7 @@
 <template>
   <v-card color="#000000">
     <!-- Location Text -->
-    <v-row class="text-center">
+    <v-row class="text-right">
       <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="display-4 py-4">{{cityName}}</v-list-item-title>
@@ -90,7 +90,7 @@ export default {
     this.getForecast();
     this.getCurrentData();
     var vm = this;
-    this.autoReloadTimer = setInterval(() => vm.getForecast(), 10 * 60 * 1000);
+    this.autoReloadTimer = setInterval(() => { vm.getForecast(); vm.getCurrentData() }, 10 * 60 * 1000);
   },
   methods: {
     async getCurrentData() {

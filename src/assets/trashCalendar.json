@@ -39,8 +39,8 @@
           "TRANSP": "TRANSPARENT"
         },
         {
-          "DTSTART;VALUE=DATE": "20200202",
-          "DTEND;VALUE=DATE": "20200203",
+          "DTSTART;VALUE=DATE": "20200201",
+          "DTEND;VALUE=DATE": "20200202",
           "DTSTAMP": "20201227T202400Z",
           "UID": "f8d68086414059747ea576d238021d1f",
           "CREATED": "20200101T090000Z",

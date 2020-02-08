@@ -14,6 +14,9 @@
       <v-col xs="12" sm="6" md="6" lg="3" xl="3" class="mt-0 pt-0">
         <weatherPanel/>
       </v-col>
+      <v-col xs="12" sm="6" md="6" lg="3" xl="3" class="mt-0 pt-0 px-0">
+        <factNewsPanel/>
+      </v-col>
     </v-row>
   </v-col>
 </v-container>
@@ -22,6 +25,7 @@
 <script>
 import weatherPanel from '../components/WeatherPanel'
 import clockPanel from '../components/ClockPanel'
+import factNewsPanel from '../components/Fact_NewsPanel'
 // import calendarPanel from '../components/CalendarPanel'
 import trashPanel from '../components/TrashPanel'
 // import comicPanel from '../components/ComicPanel'
@@ -32,6 +36,7 @@ export default {
     ClockPanel: clockPanel,
     /*CalendarPanel: calendarPanel,*/
     TrashPanel: trashPanel,
+    FactNewsPanel: factNewsPanel
     /* ComicPanel: comicPanel*/
   },
   data: () => ({
