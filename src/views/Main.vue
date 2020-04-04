@@ -17,6 +17,9 @@
       <v-col xs="12" sm="6" md="6" lg="3" xl="3" class="mt-0 pt-0 px-0">
         <factNewsPanel/>
       </v-col>
+      <v-col xs="12" sm="12" md="6" lg="5" xl="4" class="mt-0 pt-0 px-0">
+        <LogView/>
+      </v-col>      
     </v-row>
   </v-col>
 </v-container>
@@ -29,6 +32,12 @@ import factNewsPanel from '../components/Fact_NewsPanel'
 // import calendarPanel from '../components/CalendarPanel'
 import trashPanel from '../components/TrashPanel'
 // import comicPanel from '../components/ComicPanel'
+import LogView from '../components/LogView'
+const eventbus = require('../eventbus')
+//const sendEvents = require('../../lib/mirror_shared_code/socketEvents').frontendEvents
+//const receiveEvents = require('../../lib/mirror_shared_code/socketEvents').backendEvents
+
+
 export default {
   name: 'Main',
   components: {
@@ -36,11 +45,15 @@ export default {
     ClockPanel: clockPanel,
     /*CalendarPanel: calendarPanel,*/
     TrashPanel: trashPanel,
-    FactNewsPanel: factNewsPanel
+    FactNewsPanel: factNewsPanel,
+    LogView
     /* ComicPanel: comicPanel*/
   },
   data: () => ({
-
+    showDebug: (process.env.VUE_APP_SHOW_DEBUG === 'true')
   }),
+  created() {
+    eventbus.emit('stopload')
+  }
 };
 </script>
