@@ -42,6 +42,7 @@
 </template>
 <script>
 import calendar from '../assets/trashCalendar.json'
+const eventbus = require('../eventbus')
 export default {
   data () {
     return {
@@ -60,6 +61,7 @@ export default {
   methods: {
     getNextEvents () {
       console.log('Running Trash refresh.')
+      eventbus.emit('logevent', 'Refreshing Trash Data.')
       var events = calendar.VCALENDAR[0].VEVENT
       events = events.map(event => {
         var eventDate = event['DTSTART;VALUE=DATE']

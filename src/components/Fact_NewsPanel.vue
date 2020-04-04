@@ -19,6 +19,7 @@
 </template>
 <script>
 import factService from "@/services/factService";
+const eventbus = require('../eventbus')
 
 export default {
   data () {
@@ -41,6 +42,7 @@ export default {
         response = await factService.topHeadlines()
         this.headlines = response.data.articles.slice(0,5)
       } catch (error) {
+        eventbus.emit('logevent', 'Error getting fact/news: ' + error)
         console.log(error)
       }
     }

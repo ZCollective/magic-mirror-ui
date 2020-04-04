@@ -58,6 +58,7 @@
 </template>
 <script>
 import weatherService from "@/services/weatherService";
+const eventbus = require('../eventbus')
 
 export default {
   data() {
@@ -89,8 +90,9 @@ export default {
   created() {
     this.getForecast();
     this.getCurrentData();
-    var vm = this;
-    this.autoReloadTimer = setInterval(() => { vm.getForecast(); vm.getCurrentData() }, 10 * 60 * 1000);
+    var vm = this
+    this.autoReloadTimer = setInterval(() => { eventbus.emit('logevent', 'Refresh weather data.'); vm.getForecast(); vm.getCurrentData() }, 10 * 60 * 1000);
+    eventbus.emit('logevent', 'Setting refresh timer...')
   },
   methods: {
     async getCurrentData() {
@@ -103,6 +105,7 @@ export default {
         }
         console.log(this.current)
       } catch (error) {
+        eventbus.emit('logevent', 'Error polling current weather: ' + error)
         console.log(error);
         this.days = [];
       }
@@ -143,6 +146,7 @@ export default {
         this.loading = false;
         console.log(days);
       } catch (error) {
+        eventbus.emit('logevent', 'Error polling forecast: ' + error)
         console.log(error);
         this.days = [];
       }

@@ -1,0 +1,3 @@
+[submodule "lib/mirror_shared_code"]
+	path = lib/mirror_shared_code
+	url = git@gitlab.spackenserver.de:z-collection/mirror_shared_code.git
