@@ -5,15 +5,14 @@
       <v-col class="mt-0 pt-0">Mode: {{mode}}</v-col>
       <v-col class="mt-0 pt-0">Version: {{version}}</v-col>
       <v-col class="mt-0 pt-0">Build: {{build}}</v-col>
-      <v-col class="mt-0 pt-0">BE Build: {{backendVersion}}</v-col>
+      <v-col class="mt-0 pt-0">Backend: {{backendVersion}}</v-col>
       <v-col class="mt-0 pt-0">Device: {{deviceName}}</v-col>
     </v-row>
 </template>
 
 <script>
 const eventbus = require('../eventbus')
-const sendEvents = require('../../lib/mirror_shared_code/socketEvents').frontendEvents
-const receiveEvents = require('../../lib/mirror_shared_code/socketEvents').backendEvents
+const sendEvents = require('../../lib/mirror_shared_code/socketEvents')
 
 export default {
   name: "DebugInfo",
@@ -37,8 +36,8 @@ export default {
     this.routepath = this.$route.path;
 
     //Defining listener for device info event
-    eventbus.on(receiveEvents.device_info, (message) => {
-      this.backendVersion = message.version
+    eventbus.on(sendEvents.mirror_frontend.signal_get_device_info.responses.device_info, (message) => {
+      this.backendVersion = message.version + '-' + message.buildnum
       this.deviceName = message.name
     })
 
@@ -46,7 +45,7 @@ export default {
     // onOpen, onClose and onMessage events :(
     eventbus.on('socketReadyConfirm', () => {
       console.log('Received socketReadyConfirm')
-      this.$socket.sendObj({ event: sendEvents.get_device_info });
+      this.$socket.sendObj({ event: sendEvents.mirror_frontend.signal_get_device_info.event });
       this.retrySocketReady = false
     })
     eventbus.on('socketReadyDeny', () => {

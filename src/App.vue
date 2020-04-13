@@ -14,15 +14,19 @@
       </v-btn>
     </v-snackbar>
     <v-footer v-if="showDebug" color="black" fixed>
-      <DebugInfo/>
+      <v-col>
+        <v-row justify="center" v-if="updateAvailable" class="title">
+          An Update is available!
+        </v-row>
+        <DebugInfo/>
+      </v-col>
     </v-footer>
   </v-app>
 </template>
 <script>
 const deviceDetection = require("mobile-device-detect");
 const eventbus = require('./eventbus')
-const sendEvents = require('../lib/mirror_shared_code/socketEvents').frontendEvents
-const receiveEvents = require('../lib/mirror_shared_code/socketEvents').backendEvents
+const sendEvents = require('../lib/mirror_shared_code/socketEvents')
 
 import Loader from "./components/Loader"
 import DebugInfo from './components/DebugInfo'
@@ -42,7 +46,8 @@ export default {
     showSnackbar: false,
     snackBarText: '',
     showDebug: process.env.VUE_APP_SHOW_DEBUG === 'true' && !deviceDetection.isMobile,
-    socketReady: false
+    socketReady: false,
+    updateAvailable: false
   }),
   created() {
 
@@ -87,18 +92,22 @@ export default {
       this.$options.sockets.onmessage = data => {
         const message = JSON.parse(data.data);
         switch (message.event) {
-          case receiveEvents.first_start:
+          case sendEvents.mirror_frontend.signal_frontend_ready.responses.first_start:
             eventbus.emit('logevent', 'first start was detected. Pushing to qrcode.')
             // Firststart is detected, so we continue with QR code
             vm.$router.push('qrcode')
             break;
-          case receiveEvents.show_content:
+          case sendEvents.mirror_frontend.signal_frontend_ready.responses.show_content:
             // Backend says we should show the content
             vm.$router.push('content')
             break;
-          case receiveEvents.reboot:
+          case sendEvents.mirror_frontend.signal_frontend_ready.responses.reboot:
             //Reboot signal, displaying reboot dash
             eventbus.emit('load', 'Rebooting...')
+            break;
+          case sendEvents.mirror_frontend.signal_frontend_ready.responses.update_available: 
+            // Update available signal. Showing in Footer
+            this.updateAvailable = true
             break;
           default:
             //We dont need to care about this message in App.vue. Instead we are forwarding it through
@@ -110,7 +119,7 @@ export default {
       
       //As soon as the socket opens,we send ready signal to backend
       this.$socket.onopen = () => {
-        this.$socket.sendObj({ event: sendEvents.ready });
+        this.$socket.sendObj({ event: sendEvents.mirror_frontend.signal_frontend_ready.event });
         this.socketReady = true
       };
 
@@ -128,19 +137,19 @@ export default {
       const vm = this
       //As soon as the socket opens,we send ready signal to backend
       this.$socket.onopen = () => {
-        this.$socket.sendObj({ event: sendEvents.config_ready });
+        this.$socket.sendObj({ event: sendEvents.config_frontend.signal_config_ready.event });
       };
       this.$options.sockets.onmessage = data => {
         const message = JSON.parse(data.data);
         console.log('received message:')
         console.log(message)
         switch (message.event) {
-          case receiveEvents.normal_config:
+          case sendEvents.config_frontend.signal_config_ready.responses.normal_config:
             console.log('received normal config. Pushing to normal config')
             // We should go to normal config.
             vm.$router.push('config')
             break;
-          case receiveEvents.wifi_config:
+          case sendEvents.config_frontend.signal_config_ready.responses.wifi_config:
             // Backend says we should show the wifi config.
             vm.$router.push('wificonfig')
             break;
