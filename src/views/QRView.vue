@@ -23,8 +23,7 @@
 <script>
 const QRCode = require("qrcode");
 const eventbus = require('../eventbus')
-const sendEvents = require('../../lib/mirror_shared_code/socketEvents').frontendEvents
-const receiveEvents = require('../../lib/mirror_shared_code/socketEvents').backendEvents
+const sendEvents = require('../../lib/mirror_shared_code/socketEvents')
 
 
 export default {
@@ -37,11 +36,8 @@ export default {
     //saving this for later use
     const vm = this
 
-    // send startwifi signal to backend
-    this.$socket.sendObj({ event: sendEvents.start_ap });
-
     //Listening for wifiup message from backend
-    eventbus.on(receiveEvents.ap_started, message => {
+    eventbus.on(sendEvents.mirror_frontend.signal_start_ap.responses.ap_started, message => {
       console.log('received wifiup message!')
       var canvas = document.getElementById("qrcode");
       console.log(message)
@@ -67,8 +63,11 @@ export default {
             eventbus.emit('stopload')
           }
         }
-      );
-    });
+      )
+    })
+
+    // send startwifi signal to backend
+    this.$socket.sendObj({ event: sendEvents.mirror_frontend.signal_start_ap.event });
   }
-};
+}
 </script>

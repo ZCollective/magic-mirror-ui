@@ -34,8 +34,6 @@ import trashPanel from '../components/TrashPanel'
 // import comicPanel from '../components/ComicPanel'
 import LogView from '../components/LogView'
 const eventbus = require('../eventbus')
-//const sendEvents = require('../../lib/mirror_shared_code/socketEvents').frontendEvents
-//const receiveEvents = require('../../lib/mirror_shared_code/socketEvents').backendEvents
 
 
 export default {

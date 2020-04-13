@@ -92,8 +92,7 @@
 </template>
 <script>
 const eventbus = require('../eventbus')
-const sendEvents = require('../../lib/mirror_shared_code/socketEvents').frontendEvents
-const receiveEvents = require('../../lib/mirror_shared_code/socketEvents').backendEvents
+const sendEvents = require('../../lib/mirror_shared_code/socketEvents')
 
 export default {
   data: () => ({
@@ -118,7 +117,7 @@ export default {
       const vm = this
 
       // When we receive the networks event, we set variables as required
-      eventbus.on(receiveEvents.available_networks, (list) => {
+      eventbus.on(sendEvents.config_frontend.signal_list_wifi.responses.available_networks, (list) => {
         vm.scanHappened = true
         vm.scanInProgress = false
         vm.networks = list
@@ -127,7 +126,7 @@ export default {
       // Sending the scan request to backend
       console.log('sending request to backend.')
       this.scanInProgress = true
-      this.$socket.sendObj({ event: sendEvents.list_wifi })
+      this.$socket.sendObj({ event: sendEvents.config_frontend.signal_list_wifi.event })
     },
     async showDialog(ssid) {
       // Resetting variables so we dont keep old entries
@@ -148,7 +147,7 @@ export default {
       this.overlay = true
 
       //listening for backend notice about connection
-      eventbus.on(receiveEvents.new_connection_result, (data) => {
+      eventbus.on(sendEvents.config_frontend.signal_connect_wifi.responses.new_connection_result, (data) => {
         let snackBarText
         // if connection status is success, we show success, otherwise we show error snackbar.
         if (data.status) {
@@ -165,7 +164,7 @@ export default {
 
       // Send wificonnect request to backend
       this.$socket.sendObj({
-          event: sendEvents.connect_wifi, 
+          event: sendEvents.config_frontend.signal_connect_wifi.event, 
           data: { 
             ssid: this.selectedNetwork, 
             password: this.wifiPassword 
@@ -175,7 +174,7 @@ export default {
     confirmSettings() {
       this.confirmed = true
       this.$socket.sendObj({
-        event: sendEvents.confirm_wifi_settings
+        event: sendEvents.config_frontend.signal_confirm_wifi_settings.event
       })
     }
   }
