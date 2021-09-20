@@ -3,7 +3,8 @@ const backendAPI = require('./backendAPI').get()
 
 var api
 var oldToken
-const apiKey = 'AIzaSyCEvVnswL2OoVFG2QQ3YC2Z0R3lpxYLoxI'
+// Add api key here
+const apiKey = ''
 
 function getApi (token) {
   if (api === undefined || api === null || oldToken !== token) {

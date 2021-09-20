@@ -2,7 +2,8 @@ import axios from 'axios'
 const backendAPI = require('./backendAPI').get()
 
 var api
-const apiKey = '6515baab06a3123089d0183fd865be38'
+// add api key here
+const apiKey = ''
 
 function getApi () {
   if (api === undefined || api === null) {
