@@ -7,7 +7,20 @@ Together we (the [ZCollective](https://www.zollective.de) wanted to build an aff
 
 # Features  & Showcase:
 
-Here are a few impressions of the finished Mirror:
+![IMG-20200128-WA0003](https://user-images.githubusercontent.com/13379750/134216772-f8997671-e3de-46b1-9827-6ba74ddaffd2.jpg)
+
+
+## Calendar
+To the left is the option of integrating a google calendar. This will then show upcoming appointments and provides a preview for up to 8 individual appointments.
+
+## Time
+In the middle top is a time display, including the current date. Very simple.
+
+## Weather
+On the top right is a weather panel, which shows the current weather, temperature and windspeed. As well as the location it displays the weather for. Directly below is a forecast for the next five days with the temperature and weather to be expected.
+
+## Fact & News
+Below the weather panel is a news panel which cycles through the top ten news headlines of the last hour. Additionally it shows a random fact of the day.
 
 
 
