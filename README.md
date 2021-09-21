@@ -23,29 +23,26 @@ On the top right is a weather panel, which shows the current weather, temperatur
 Below the weather panel is a news panel which cycles through the top ten news headlines of the last hour. Additionally it shows a random fact of the day.
 
 
-
-##
-
-## Hardware:
+# Hardware:
 
 The Mirror hardware consists of 3 main pieces:
 
-### The Screen:
+## The Screen:
 Initially we repurposed an old computer screen, however this proved to be unsatisfactory as the screens was too thick to fit comfortable within 3 cm thickness we wanted to achieve with the mirror.
 We found and ordered test screens (lcd panels, driver board and control board) from a supplier which had the required thickness.
 
 The screens are 24inch diagonal, and have a Full-HD resolution
 
-### The mirror & Frame
+## The mirror & Frame
 To display information through a mirror a special type of glass is required, so called two-way-mirrors glas. This will allow light to pass through from behind the mirror, while reflecting light shining from the other surface. Generally light will pass through from the brighter to the darker side.
 
 To mount the glass, screen and other hardware we build a wooden backplate, with cutouts for the Screen.
 
-### Compute & Human sensing
+## Compute & Human sensing
 To fulfil the compute needs and display information on the mirror we went for the obvious choice of hobbyists worldwide: The Raspberry PI. We experimented with BananaPi and other derivatives, but it turned out the Raspberry is the easiest to use.
 Additionally we needed to find a way to detect a human presence, as we wanted the screen to shutoff when noone was there. Initially we went with Passive PIR sensors reacting to body heat. However this would not work through the glass and looks ugly poking out above or below the glass. We settled on activemicrowave sensing, which manages to detect motion within a 5-7 meter radius.
 
-## Future Plans:
+# Future Plans:
 Even though we have our current prototypes working, we want to improve the hardware, design and technology behind the mirror to make it more affordable. The concrete areas we need to work on are:
 
 * Switch to cheaper hardware, Raspberry PIs are quite expensive
